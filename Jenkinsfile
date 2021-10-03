@@ -16,6 +16,13 @@ pipeline{
 				}
 			}
 		}
+		stage('Container Sonnar-Docker'){
+			steps{
+				dir('src/main/resources/montagem/sonnar'){
+			    	bat 'docker-compose up -d'
+				}
+			}
+		}
 	}
 }
 
