@@ -11,7 +11,9 @@ pipeline{
 		}
 		stage('Unit Tests'){
 			steps{
-				bat 'mvn test'
+				dir('tasks-backend'){
+			    	bat 'mvn test'
+				}
 			}
 		}
 	}
