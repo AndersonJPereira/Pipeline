@@ -41,6 +41,13 @@ pipeline{
 				}
 			}
 		}
+		stage('Docker Deploy Backend'){
+			steps{
+				dir('src/main/resources/montagem/deploybackend'){
+			    	bat 'docker-compose up -d'
+				}
+			}
+		}
 	}
 }
 
