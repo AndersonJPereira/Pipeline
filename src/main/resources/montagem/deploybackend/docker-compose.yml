@@ -15,7 +15,7 @@ services:
         build:
             context: .
             args:
-                - WAR_FILE=C:/Users/anderson.x.pereira/.jenkins/workspace/Pipeline - FULL/tasks-backend/target/tasks-backend.war
+                - WAR_FILE=target/tasks-backend.war
                 - CONTEXT_NAME=tasks-backend
         ports:
             - 8001:8080
