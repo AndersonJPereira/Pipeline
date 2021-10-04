@@ -61,7 +61,6 @@ pipeline{
 		}
 		stage('Docker Ambiente Teste'){
 			steps{
-				sleep(30)
 				bat 'docker-compose -f docker-compose-ambienteTST.yml up -d'
 			}
 		}
@@ -72,6 +71,20 @@ pipeline{
 					git 'https://github.com/AndersonJPereira/tasks-functional-test.git'
 					bat 'mvn clean test'			    
 				}
+			}
+		}
+		stage('Deploy Prod'){
+			steps{
+				bat 'docker-compose -f docker-compose-ambientePRD.yml up -d'			
+			}
+		}
+		
+		stage('Health Check'){
+			steps{
+				dir('functional-tests'){
+					sleep(30)
+					bat 'mvn verify -Dskip.surefire.tests'
+				}			
 			}
 		}
 	}
