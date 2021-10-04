@@ -4,10 +4,10 @@ services:
         container_name: pg-tasks
         image: postgres:9.6
         ports:
-          - 5433:5432
+            - 5433:5432
         environment:
-          - POSTGRES_DB=tasks
-          - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=tasks
+            - POSTGRES_PASSWORD=password
     
     backend:
         container_name: backend-tst
@@ -28,7 +28,7 @@ services:
         depends_on:
             - pg-tasks
             
-     frontend:
+    frontend:
         container_name: frontend-tst
         image: front_tst:build_${BUILD_NUMBER}
         build:
