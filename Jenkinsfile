@@ -19,7 +19,7 @@ pipeline{
 		stage('Docker SonnarQube'){
 			steps{
 				dir('src/main/resources/montagem/sonnar'){
-			    	bat 'docker-compose up -d'
+			    	bat 'docker-compose.sonnar up -d'
 				}
 			}
 		}
@@ -38,13 +38,6 @@ pipeline{
 				sleep(10)
 				timeout(time:1, unit:'MINUTES'){
 					waitForQualityGate abortPipeline:true 
-				}
-			}
-		}
-		stage('Docker Deploy Backend'){
-			steps{
-				dir('src/main/resources/montagem/deploybackend'){
-			    	bat 'docker-compose up -d'
 				}
 			}
 		}
