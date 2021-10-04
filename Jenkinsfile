@@ -42,8 +42,7 @@ pipeline{
 		}
 		stage('Docker SonnarQube Down'){
 			steps{
-				bat 'docker stop sonar -d'
-				bat 'docker stop pg-sonar -d'
+				bat 'docker stop sonar pg-sonar'
 				sleep(10)
 			}
 		}
