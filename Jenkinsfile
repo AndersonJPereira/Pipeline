@@ -16,10 +16,10 @@ pipeline{
 				}
 			}
 		}
-		stage('Docker SonnarQube'){
+		stage('Docker SonnarQube Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-sonnar.yml up -d'
-				sleep(120)
+				sleep(90)
 			}
 		}
 		stage('SonarQube-Analysis'){
@@ -38,6 +38,13 @@ pipeline{
 				timeout(time:1, unit:'MINUTES'){
 					waitForQualityGate abortPipeline:true 
 				}
+			}
+		}
+		stage('Docker SonnarQube Down'){
+			steps{
+				bat 'docker stop sonar -d'
+				bat 'docker stop pg-sonar -d'
+				sleep(10)
 			}
 		}
 		stage('Docker Deploy Backend'){
