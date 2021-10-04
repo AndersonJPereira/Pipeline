@@ -20,7 +20,7 @@ services:
         ports:
             - 8001:8080
         environment:
-            - DATABASE_HOST=db
+            - DATABASE_HOST=pg-tasks
             - DATABASE_PORT=5433
             - DATABASE_USER=postgres
             - DATABASE_PASSWD=password
