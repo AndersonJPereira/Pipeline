@@ -45,6 +45,14 @@ pipeline{
 				bat 'docker-compose -f docker-compose-deploybackend.yml up -d'	
 			}
 		}
+		stage('API Tests'){
+			steps{
+				dir('api-tests'){
+					git 'https://github.com/AndersonJPereira/tasks-api-test.git'
+					bat 'mvn clean test'			    
+				}
+			}
+		}
 	}
 }
 
