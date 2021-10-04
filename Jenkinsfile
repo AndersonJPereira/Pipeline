@@ -16,7 +16,7 @@ pipeline{
 				}
 			}
 		}
-		stage('Docker SonnarQube Up'){
+		stage('Docker SonarQube Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-sonnar.yml up -d'
 				sleep(90)
@@ -40,13 +40,12 @@ pipeline{
 				}
 			}
 		}
-		stage('Docker SonnarQube Down'){
+		stage('Docker SonarQube Down'){
 			steps{
 				bat 'docker stop sonar pg-sonar'
-				sleep(10)
 			}
 		}
-		stage('Docker Deploy Backend'){
+		stage('Docker Deploy Backend Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-deploybackend.yml up -d'
 			}
@@ -60,12 +59,12 @@ pipeline{
 				}
 			}
 		}
-		stage('Docker Deploy Frontend'){
+		stage('Docker Deploy Frontend Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-deployfrontend.yml up -d'
 			}
 		}
-		stage('Docker Ambiente Teste'){
+		stage('Docker Ambiente Teste Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-ambienteTST.yml up -d'
 			}
@@ -79,7 +78,12 @@ pipeline{
 				}
 			}
 		}
-		stage('Deploy Prod'){
+		stage('Docker Deploy Frontend Backend Down'){
+			steps{
+				bat 'docker stop frontend-tst backend-tst pg-tasks'
+			}
+		}
+		stage('Docker Deploy Prod Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-ambientePRD.yml up -d'			
 			}
