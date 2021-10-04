@@ -40,22 +40,35 @@ pipeline{
 				}
 			}
 		}
-		stage('Docker Ambiente de TST'){
+		stage('Docker Deploy Backend'){
 			steps{
-				bat 'docker-compose -f docker-compose-ambienteTST.yml up -d'
+				bat 'docker-compose -f docker-compose-deploybackend.yml up -d'
 			}
 		}
 		stage('API Tests'){
 			steps{
 				dir('api-tests'){
+					sleep(30)
 					git 'https://github.com/AndersonJPereira/tasks-api-test.git'
 					bat 'mvn clean test'			    
 				}
 			}
 		}
+		stage('Docker Deploy Frontend'){
+			steps{
+				bat 'docker-compose -f docker-compose-deployfrontend.yml up -d'
+			}
+		}
+		stage('Docker Ambiente Teste'){
+			steps{
+				sleep(30)
+				bat 'docker-compose -f docker-compose-ambienteTST.yml up -d'
+			}
+		}
 		stage('Functional Tests'){
 			steps{
 				dir('functional-tests'){
+					sleep(30)
 					git 'https://github.com/AndersonJPereira/tasks-functional-test.git'
 					bat 'mvn clean test'			    
 				}
