@@ -40,6 +40,11 @@ pipeline{
 				}
 			}
 		}
+		stage('Docker Deploy Backend'){
+			steps{
+				bat 'docker-compose -f docker-compose-deploybackend.yml up -d'	
+			}
+		}
 	}
 }
 
