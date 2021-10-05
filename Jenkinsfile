@@ -19,7 +19,7 @@ pipeline{
 		stage('Docker SonarQube Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-sonnar.yml up -d'
-				sleep(90)
+				sleep(30)
 			}
 		}
 		stage('SonarQube-Analysis'){
