@@ -53,7 +53,7 @@ pipeline{
 		stage('API Tests'){
 			steps{
 				dir('api-tests'){
-					sleep(30)
+					sleep(10)
 					git 'https://github.com/AndersonJPereira/tasks-api-test.git'
 					bat 'mvn clean test'			    
 				}
@@ -72,7 +72,7 @@ pipeline{
 		stage('Functional Tests'){
 			steps{
 				dir('functional-tests'){
-					sleep(30)
+					sleep(10)
 					git 'https://github.com/AndersonJPereira/tasks-functional-test.git'
 					bat 'mvn clean test'			    
 				}
@@ -92,7 +92,7 @@ pipeline{
 		stage('Health Check'){
 			steps{
 				dir('functional-tests'){
-					sleep(30)
+					sleep(10)
 					bat 'mvn verify -Dskip.surefire.tests'
 				}			
 			}
