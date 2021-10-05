@@ -64,7 +64,7 @@ pipeline{
 				bat 'docker-compose -f docker-compose-deployfrontend.yml up -d'
 			}
 		}
-		stage('Docker Ambiente Teste Up'){
+		stage('Docker Seleniun Grid Up'){
 			steps{
 				bat 'docker-compose -f docker-compose-ambienteTST.yml up -d'
 			}
@@ -95,6 +95,16 @@ pipeline{
 					sleep(30)
 					bat 'mvn verify -Dskip.surefire.tests'
 				}			
+			}
+		}
+		stage('Docker Seleniun Grid Down'){
+			steps{
+				bat 'docker stop Chrome-1 Chrome-2 selenium-hub'		
+			}
+		}
+		stage('Docker Deploy Prod Down'){
+			steps{
+				bat 'docker stop backend-prod frontend-prod pg-prod'		
 			}
 		}
 	}
