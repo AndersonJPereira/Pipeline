@@ -110,7 +110,7 @@ pipeline{
 	}
 	post{
 	    always{
-	        junit allowEmptyResults: true, testResults: 'tasks-backend/target/surefire-reports/*.xml', 'functional-tests/target/surefire-reports/*.xml', 'functional-tests/target/failsafe-reports/*.xml'
+	        junit allowEmptyResults: true, testResults: 'tasks-backend/target/surefire-reports/*.xml, functional-tests/target/surefire-reports/*.xml, functional-tests/target/failsafe-reports/*.xml'
 	    }
 
 	}
