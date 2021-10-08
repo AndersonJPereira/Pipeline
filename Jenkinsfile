@@ -18,8 +18,6 @@ pipeline{
 		}
 		stage('Docker SonarQube Up'){
 			steps{
-				bat 'wsl -d docker-desktop'
-				bat 'sysctl -w vm.max_map_count=262144'
 				bat 'docker-compose -f docker-compose-sonnar.yml up -d'
 				sleep(60)
 			}
