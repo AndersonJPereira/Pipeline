@@ -110,8 +110,17 @@ pipeline{
 	}
 	post{
 	    always{
-	        junit allowEmptyResults: true, testResults: 'tasks-backend/target/surefire-reports/*.xml, functional-tests/target/surefire-reports/*.xml, functional-tests/target/failsafe-reports/*.xml'
+	        junit allowEmptyResults: true, testResults: 'tasks-backend/target/surefire-reports/*.xml, api-tests/target/surefire-reports, functional-tests/target/surefire-reports/*.xml, functional-tests/target/failsafe-reports/*.xml'
+	    	archiveArtifacts artifacts: 'tasks-backend/target/tasks-backend.war, tasks-frontend/target/tasks.war', followSymlinks: false, onlyIfSuccessful: true
 	    }
+	    unsuccessful{
+	        emailext attachLog: true, body: 'See attachment below', subject: 'BUILD $BUILD_NUMBER has failed', to: 'slash.frusciante+jenkins@gmail.com'
+	    }
+	    success{
+	        emailext attachLog: true, body: 'Deploy has benn fixed', subject: 'BUILD $BUILD_NUMBER has deployed OK', to: 'slash.frusciante+jenkins@gmail.com'	
+	    }
+
+
 
 	}
 
